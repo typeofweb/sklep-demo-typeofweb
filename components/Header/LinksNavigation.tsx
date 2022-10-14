@@ -6,6 +6,10 @@ const links = [
     label: 'Shop',
   },
   {
+    href: '/products-csr',
+    label: 'CSR',
+  },
+  {
     href: '/about',
     label: 'About',
   },
@@ -29,7 +33,7 @@ interface LinkNavigationItemProps {
 const LinkNavigationItem = ({ href, label }: LinkNavigationItemProps) => {
   return (
     <li className="block">
-      <ActiveLink href={href} activeClassName="border-current">
+      <ActiveLink href={href} activeClassName="border-current" exact={false}>
         <a className="block h-16 border-b-4 border-transparent leading-[4rem] hover:border-current hover:text-red-700">
           {label}
         </a>

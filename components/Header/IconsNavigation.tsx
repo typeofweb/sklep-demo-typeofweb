@@ -77,7 +77,7 @@ interface IconNavigationItemProps {
 const IconNavigationItem = ({ href, label, icon }: IconNavigationItemProps) => {
   return (
     <li>
-      <ActiveLink href={href} activeClassName="border-red-700">
+      <ActiveLink href={href} activeClassName="border-red-700" exact={false}>
         <a className="block border-b-4 border-transparent p-6 hover:border-red-700">
           {icon}
           <span className="sr-only"> {label} </span>
