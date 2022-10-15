@@ -6,6 +6,10 @@ const links = [
     label: 'Shop',
   },
   {
+    href: '/products/1',
+    label: 'SSG',
+  },
+  {
     href: '/products-csr',
     label: 'CSR',
   },
