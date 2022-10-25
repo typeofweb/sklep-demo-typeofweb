@@ -1,5 +1,5 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { getProductsForPage } from '../../apis/getProducts';
+import { countProducts, getProductsForPage } from '../../apis/getProducts';
 import { ProductsList } from '../../components/ProductsList';
 import { ProductsPagination } from '../../components/ProductsPagination';
 import { InferGetStaticPathsType } from '../../types';
@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
         page: (idx + 1).toString(),
       },
     })),
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 
@@ -39,6 +39,13 @@ export const getStaticProps = async ({
   }
 
   const products = await getProductsForPage(Number.parseInt(params.page));
+
+  if (products.length === 0) {
+    return {
+      notFound: true,
+      props: {},
+    };
+  }
 
   return {
     props: {

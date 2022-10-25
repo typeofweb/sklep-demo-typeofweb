@@ -23,7 +23,7 @@ export const getProducts = async () => {
   return data as StoreApiResponse;
 };
 
-const PRODUCTS_PER_PAGE = 24;
+export const PRODUCTS_PER_PAGE = 24;
 export const getProductsForPage = async (page: number) => {
   // await new Promise((_, reject) => setTimeout(reject, 50));
   const res = await fetch(
@@ -31,4 +31,19 @@ export const getProductsForPage = async (page: number) => {
   );
   const data = await res.json();
   return data as StoreApiResponse;
+};
+
+export const countProducts = async (count = 0): Promise<number> => {
+  const PER_FETCH = 501;
+
+  const res = await fetch(`https://naszsklep-api.vercel.app/api/products?take=${PER_FETCH}&offset=${count}`);
+  const data = (await res.json()) as StoreApiResponse;
+
+  const newCount = count + data.length;
+
+  if (data.length === PER_FETCH) {
+    return countProducts(newCount);
+  } else {
+    return newCount;
+  }
 };
